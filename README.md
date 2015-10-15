@@ -19,6 +19,10 @@ email_address = ****@****
 
 password = ***** 
 
+\#Email to recieve the alert
+
+receiving-address = ***@***
+
 smtp-server = smtp.gmail.com
 
 port = 587
