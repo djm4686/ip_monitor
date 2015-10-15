@@ -8,6 +8,11 @@ from email.mime.text import MIMEText
 config = ConfigParser.RawConfigParser()
 config.read(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'ip_config.cfg'))
 
+def get_receiving_email():
+    try:
+        return config.get('info', 'receiving email')
+    except:
+        return None
 
 def get_ip_config():
     try:
@@ -43,8 +48,8 @@ def ip_get(url):
 
 def send_email(ip):
 
-    sending_email = "dynamicipalert@gmail.com"
-    recieving_email = "guthran@gmail.com"
+    sending_email = get_email()
+    recieving_email = get_receiving_email()
     subject = "IP ADDRESS CHANGED!"
     body = "The ip address for schroedinger has changed. Please update your DNS records to reflect the new IP: {}".format(ip)
 
@@ -58,7 +63,7 @@ def send_email(ip):
 
     s.ehlo()
     s.starttls()
-    s.login(get_email(), get_email_password())
+    s.login(sending_email, get_email_password())
 
     s.sendmail(sending_email, [recieving_email], message.as_string())
 
