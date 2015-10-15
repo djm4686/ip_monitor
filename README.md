@@ -7,7 +7,7 @@ The cfg should look like:
 
 [info]
 
-/# old or current ip
+\# old or current ip
 
 ip = 76.28.16.85
 
