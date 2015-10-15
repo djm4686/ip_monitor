@@ -10,7 +10,7 @@ config.read(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'ip_config.
 
 def get_receiving_email():
     try:
-        return config.get('info', 'receiving email')
+        return config.get('info', 'receiving_email')
     except:
         return None
 
