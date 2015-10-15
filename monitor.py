@@ -21,6 +21,20 @@ def get_email_password():
     except:
         return None
 
+def get_email():
+    try:
+        return config.get('info', 'email_address')
+    except:
+        return None
+
+def get_smtp_and_port():
+    try:
+        smtp = config.get("info", 'smtp-server')
+        port = config.get('info', 'port')
+        return smtp, port
+    except:
+        return None
+
 def ip_get(url):
     opener = urllib2.build_opener()
     opener.addheaders = [('User-agent', 'Mozilla/5.0')]
@@ -33,15 +47,21 @@ def send_email(ip):
     recieving_email = "guthran@gmail.com"
     subject = "IP ADDRESS CHANGED!"
     body = "The ip address for schroedinger has changed. Please update your DNS records to reflect the new IP: {}".format(ip)
+
     message = MIMEText(body)
     message['Subject'] = subject
     message['From'] = sending_email
     message['To'] = recieving_email
-    s = smtplib.SMTP('smtp.gmail.com', port=587)
+
+    con_info = get_smtp_and_port()
+    s = smtplib.SMTP(con_info[0], port=con_info[1])
+
     s.ehlo()
     s.starttls()
-    s.login(sending_email, get_email_password())
+    s.login(get_email(), get_email_password())
+
     s.sendmail(sending_email, [recieving_email], message.as_string())
+
     s.quit()
 
 
