@@ -21,7 +21,7 @@ password = *****
 
 \#Email to recieve the alert
 
-receiving-address = ***@***
+receiving-address = ****@****
 
 smtp-server = smtp.gmail.com
 
