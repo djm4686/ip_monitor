@@ -51,7 +51,7 @@ def send_email(ip):
     sending_email = get_email()
     recieving_email = get_receiving_email()
     subject = "IP ADDRESS CHANGED!"
-    body = "The ip address for schroedinger has changed. Please update your DNS records to reflect the new IP: {}".format(ip)
+    body = "The ip address has changed. Please update your DNS records to reflect the new IP: {}".format(ip)
 
     message = MIMEText(body)
     message['Subject'] = subject
